@@ -17,13 +17,16 @@ public class PostController {
     private final PostService postService;
 
     @GetMapping
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+   @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<PostDTO> getAllPosts() {
         return postService.getAllPosts();
     }
 
     @GetMapping("/{postId}")
+//    @PreAuthorize("hasAnyRole('USER','ADMIN') OR hasAuthority('POST_VIEW')")
+//    above we do not need to add ROLE_ prefix to user as hasRole method does that automatically
     @PreAuthorize("@postSecurity.isOwnerOfPost(#postId)")
+//    # is used to passing parameter to method
     public PostDTO getPostById(@PathVariable Long postId) {
         return postService.getPostById(postId);
     }

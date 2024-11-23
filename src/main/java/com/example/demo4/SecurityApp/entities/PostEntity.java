@@ -22,5 +22,6 @@ public class PostEntity {
 
     @ManyToOne
     private User author;
+//    as one user can have many post
 
 }

@@ -22,6 +22,10 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
         );
+//        In your custom login logic, Spring Security does not automatically store the Authentication in the SecurityContext. You need to do it manually using:
+//java
+//Copy code
+//SecurityContextHolder.getContext().setAuthentication(authentication);
 
         User user = (User) authentication.getPrincipal();
         String accessToken = jwtService.generateAccessToken(user);

@@ -25,4 +25,5 @@ public class Session {
 
     @ManyToOne
     private User user;
+//    as one user can have many session and this is Session class
 }
