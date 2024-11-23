@@ -35,6 +35,7 @@ public class PostServiceImpl implements PostService{
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //        we are saving the post with the user who creates it for this we are getting user from securitycontext
         PostEntity postEntity = modelMapper.map(inputPost, PostEntity.class);
+//        below we are saving user
         postEntity.setAuthor(user);
         return modelMapper.map(postRepository.save(postEntity), PostDTO.class);
     }
